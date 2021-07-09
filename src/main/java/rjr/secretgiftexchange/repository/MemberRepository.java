@@ -21,4 +21,19 @@ public class MemberRepository {
 		return members;
 	}
 
+	public Member getMemberById(int memberId) {
+		throw new RuntimeException("unimplemented");
+	}
+
+	public void addNewMember(Member newMember) {
+		throw new RuntimeException("unimplemented");
+	}
+
+	public void updateMember(Member updatedMember) {
+		throw new RuntimeException("unimplemented");
+	}
+
+	public void deleteMemberById(int memberId) {
+		throw new RuntimeException("unimplemented");
+	}
 }

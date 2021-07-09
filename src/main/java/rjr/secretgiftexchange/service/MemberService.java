@@ -18,4 +18,19 @@ public class MemberService {
 		return memberRepository.getMembers();
 	}
 
+	public Member getMemberById(int memberId) {
+		return memberRepository.getMemberById(memberId);
+	}
+
+	public void addNewMember(Member newMember) {
+		memberRepository.addNewMember(newMember);
+	}
+
+	public void updateMember(Member updatedMember) {
+		memberRepository.updateMember(updatedMember);
+	}
+
+	public void deleteMemberById(int memberId) {
+		memberRepository.deleteMemberById(memberId);
+	}
 }
