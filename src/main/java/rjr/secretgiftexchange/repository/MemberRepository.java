@@ -21,6 +21,10 @@ public class MemberRepository {
 		return new ArrayList<>(members.values());
 	}
 
+	public Map<Integer, Member> getMapOfMembers() {
+		return members;
+	}
+
 	public Member getMemberById(int memberId) {
 		Member m = members.get(memberId);
 		if (m == null) {
