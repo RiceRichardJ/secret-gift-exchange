@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import rjr.secretgiftexchange.model.Member;
+import rjr.secretgiftexchange.model.MemberRequest;
+import rjr.secretgiftexchange.model.MemberResponse;
 import rjr.secretgiftexchange.service.MemberService;
 
 @RestController
@@ -23,23 +24,23 @@ public class MemberController {
 	MemberService memberService;
 
 	@GetMapping()
-	public List<Member> getMembers() {
+	public List<MemberResponse> getMembers() {
 		return memberService.getMembers();
 	}
 
 	@GetMapping("{memberId}")
-	public Member getMemberById(@PathVariable int memberId) {
+	public MemberResponse getMemberById(@PathVariable int memberId) {
 		return memberService.getMemberById(memberId);
 	}
 
 	@PostMapping()
-	public void addNewMember(@RequestBody Member newMember) {
+	public void addNewMember(@RequestBody MemberRequest newMember) {
 		memberService.addNewMember(newMember);
 	}
 
 	@PutMapping("{memberId}")
-	public void updateMember(@PathVariable int memberId, @RequestBody Member newMember) {
-		memberService.updateMember(newMember);
+	public void updateMember(@PathVariable int memberId, @RequestBody MemberRequest newMember) {
+		memberService.updateMember(memberId, newMember);
 	}
 
 	@DeleteMapping("{memberId}")

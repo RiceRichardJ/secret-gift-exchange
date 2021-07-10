@@ -14,6 +14,8 @@ import rjr.secretgiftexchange.model.Member;
 @Repository
 public class MemberRepository {
 
+	private static int id = 0;
+
 	Map<Integer, Member> members = new HashMap<>();
 
 	public List<Member> getMembers() {
@@ -29,6 +31,7 @@ public class MemberRepository {
 	}
 
 	public void addNewMember(Member newMember) {
+		newMember.setId(id++);
 		members.put(newMember.getId(), newMember);
 	}
 
@@ -40,6 +43,9 @@ public class MemberRepository {
 	}
 
 	public void deleteMemberById(int memberId) {
+		if (members.get(memberId) == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member does not exist");
+		}
 		members.remove(memberId);
 	}
 }
