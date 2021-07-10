@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.server.ResponseStatusException;
 
+import rjr.secretgiftexchange.exception.ResourceNotFoundException;
 import rjr.secretgiftexchange.model.Member;
 
 @Repository
@@ -25,7 +24,7 @@ public class MemberRepository {
 	public Member getMemberById(int memberId) {
 		Member m = members.get(memberId);
 		if (m == null) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member does not exist");
+			throw new ResourceNotFoundException();
 		}
 		return m;
 	}
@@ -37,14 +36,14 @@ public class MemberRepository {
 
 	public void updateMember(Member updatedMember) {
 		if (members.get(updatedMember.getId()) == null) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member does not exist");
+			throw new ResourceNotFoundException();
 		}
 		members.put(updatedMember.getId(), updatedMember);
 	}
 
 	public void deleteMemberById(int memberId) {
 		if (members.get(memberId) == null) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member does not exist");
+			throw new ResourceNotFoundException();
 		}
 		members.remove(memberId);
 	}
