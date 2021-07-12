@@ -15,7 +15,7 @@ public class MemberRepository {
 
 	private static int id = 0;
 
-	Map<Integer, Member> members = new HashMap<>();
+	private Map<Integer, Member> members = new HashMap<>();
 
 	public List<Member> getMembers() {
 		return new ArrayList<>(members.values());
