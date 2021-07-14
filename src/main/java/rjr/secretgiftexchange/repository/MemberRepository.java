@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ public class MemberRepository {
 
 	private static int id = 0;
 
-	private Map<Integer, Member> members = new HashMap<>();
+	private Map<Integer, Member> members = new TreeMap<>();
 
 	public List<Member> getMembers() {
 		return new ArrayList<>(members.values());

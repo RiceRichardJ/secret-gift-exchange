@@ -75,10 +75,6 @@ public class GiftService {
 		// needs to be in same order, not guaranteed from map/set
 		Map<Integer, Member> members = memberRepository.getMapOfMembers();
 
-		if (members.size() < 4) {
-			throw new RuntimeException("nope");
-		}
-
 		Integer rotAmt1 = giftRepository.getRotationAmtForYear(year - 1);
 		rotAmt1 = rotAmt1 == null ? 0 : rotAmt1;
 		Integer rotAmt2 = giftRepository.getRotationAmtForYear(year - 2);
@@ -86,16 +82,19 @@ public class GiftService {
 
 		Random r = new Random();
 		int newRotAmt = r.nextInt(members.size() - 1) + 1;
-		while (newRotAmt == rotAmt1 || newRotAmt == rotAmt2) {
-			newRotAmt = r.nextInt(members.size() - 1) + 1;
+		if (members.size() > 3) {
+			while (newRotAmt == rotAmt1 || newRotAmt == rotAmt2) {
+				newRotAmt = r.nextInt(members.size() - 1) + 1;
+			}
 		}
 
+		List<Member> memberList = memberRepository.getMembers();
 		Set<GiftExchange> exchanges = new HashSet<>();
-		for (int i = 0; i < members.size(); i++) {
-			int rotatedIndex = (newRotAmt + i) % members.size();
+		for (int i = 0; i < memberList.size(); i++) {
+			int rotatedIndex = (newRotAmt + i) % memberList.size();
 
-			int gifterId    = members.get(i).getId();
-			int recipientId = members.get(rotatedIndex).getId();
+			int gifterId    = memberList.get(i).getId();
+			int recipientId = memberList.get(rotatedIndex).getId();
 
 			GiftExchange newExchange = GiftExchange.builder()
 					.gifterId(gifterId)
